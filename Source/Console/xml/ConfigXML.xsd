@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:complexType name="Elements">
+		<xs:sequence>
+			<xs:element name="Element" type="Element" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Element">
+		<xs:sequence>
+			<xs:element name="Attributes" type="Attributes" minOccurs="0"/>
+			<xs:element name="Elements" type="Elements" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="Action" type="ElementAction" use="required"/>
+		<xs:attribute name="XPath" type="xs:string"/>
+		<xs:attribute name="Name" type="xs:string"/>
+		<xs:attribute name="Value" type="xs:string"/>
+		<xs:attribute name="Order" type="xs:int" use="optional" default="0"/>
+		<xs:attribute name="Force" type="xs:boolean"/>
+		<xs:attribute name="Edit" type="xs:boolean"/>
+		<xs:attribute name="TargetXPath" type="xs:string"/>
+		<xs:attribute name="Schema" type="xs:string"/>
+		<xs:attribute name="ComplexType" type="xs:string"/>
+		<xs:attribute name="Regex" type="xs:string"/>
+		<xs:attribute name="Replace" type="xs:string"/>
+		<xs:attribute name="Print" type="xs:string"/>
+		<xs:attribute name="ProcessingOrder" type="ProcessingOrder" use="optional" default="Document"/>
+		<xs:attribute name="UseCData" type="xs:boolean"/>
+	</xs:complexType>
+	<xs:complexType name="Attributes">
+		<xs:sequence>
+			<xs:element name="Attribute" type="Attribute" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Attribute">
+		<xs:attribute name="Action" type="AttributeAction" use="required"/>
+		<xs:attribute name="Name" type="xs:string"/>
+		<xs:attribute name="Value" type="xs:string"/>
+		<xs:attribute name="Force" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="Edit" type="xs:boolean" use="optional" default="false"/>
+	</xs:complexType>
+	<xs:simpleType name="AttributeAction">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Add"/>
+			<xs:enumeration value="Remove"/>
+			<xs:enumeration value="Update"/>
+			<xs:enumeration value="Rename"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ElementAction">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Add"/>
+			<xs:enumeration value="Remove"/>
+			<xs:enumeration value="Update"/>
+			<xs:enumeration value="Rename"/>
+			<xs:enumeration value="Move"/>
+			<xs:enumeration value="DocumentUpdate"/>
+			<xs:enumeration value="MoveAfter"/>
+			<xs:enumeration value="ValidateSchema"/>
+			<xs:enumeration value="RegexReplace"/>
+			<xs:enumeration value="OrderBySchema"/>
+			<xs:enumeration value="ParseSqlInsert"/>
+			<xs:enumeration value="Print"/>
+			<xs:enumeration value="Copy"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ProcessingOrder">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Document"/>
+			<xs:enumeration value="TopDown"/>
+			<xs:enumeration value="BottomUp"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="ConfigXML">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Elements" type="Elements"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
