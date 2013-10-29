@@ -1,6 +1,6 @@
 What's XPatch?
 --------------
-XPatch is an xml-based DSL for (mainly) xml document modifications, best summarized as imperative cousin of XSLT.
+XPatch is an xml-based DSL for (mainly) xml document modifications, best summarized as imperative cousin of XSLT. Work in progress.
 
 Credits
 -------
